@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Board</title>
+</head>
+<style>
+
+    *{margin:0 auto; padding:0; text-align: center; font-size: 11px;}
+
+    form{border:1px solid black; width:300px; height:120px;margin-top:100px; margin-bottom: 20px; border-radius:10px;}
+    .wrap{width:300px; height:20px; margin-bottom: 10px;}
+    .wrap:first-child{margin-top:10px;}
+    form span{float:left; font-weight: bold; margin-left:10px;}
+    form input{float:right; margin-right:5px;}
+
+    table{width:500px; margin-top: 20px;}
+    tr{height:20px;}
+    #content{width:300px;}
+    #writer{width:100px;}
+    #regdate{width:100px;}
+    .title{font-weight: bold;border-left:1px solid black;}
+    .title:last-child{border-right: 1px solid black;}
+
+</style>
+<body>
+    <p th:if ="${message}" th:text="${message}"></p>
+    <form action="/board" method="POST">
+        <div class="wrap"><span>id: </span><input type="text" name="id"></div>
+        <div class="wrap"><span>password: </span><input type="password" name="password"></div>
+        <div class="wrap"><span>comment: </span><input type="text" name="content"></div>
+        <input type="submit" value="comment">
+    </form>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <td id="content" class="title">내용</td>
+                <td id="writer" class="title">작성자</td>
+                <td id="regdate" class="title">날짜</td>
+            </tr>
+        </thead>
+        <tbody>
+            <div th:if="${comment}">
+                <tr th:each="num:${comment}">
+                    <td class="content" th:text="${num.content}">1</td>
+                    <td class="content" th:text="${num.writer.getName()}">2</td>
+                    <td class="content" th:text="${num.regdate}">3</td>
+                </tr>
+            </div>
+        </tbody>
+    </table>
+</body>
+</html>
